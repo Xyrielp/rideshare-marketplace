@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motor Rental Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="logo">
+                    <h1>🏍️ MotorRent</h1>
+                </div>
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Search for motorcycles, brands, models...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <div class="header-actions">
+                    <button id="rentBtn" class="sell-btn">Open Shop</button>
+                    <button id="storesBtn" class="stores-btn">Browse Shops</button>
+                    <a href="shop-owners/dashboard.html" class="dashboard-btn">Dashboard</a>
+                    <div class="cart-icon">🛒</div>
+                </div>
+            </div>
+        </div>
+        <nav class="nav-bar">
+            <div class="container">
+                <button id="homeBtn" class="nav-link active">All Motorcycles</button>
+                <button id="shopsBtn" class="nav-link">All Shops</button>
+                <button class="nav-link" data-category="sport">Sport Bikes</button>
+                <button class="nav-link" data-category="cruiser">Cruisers</button>
+                <button class="nav-link" data-category="touring">Touring</button>
+                <button class="nav-link" data-category="scooter">Scooters</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Home Section -->
+        <section id="homeSection">
+            <div class="container">
+                <div class="filters-section">
+                    <div class="sort-options">
+                        <span>Sort by:</span>
+                        <select id="sortFilter">
+                            <option value="">Relevance</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest First</option>
+                        </select>
+                    </div>
+                    <div class="results-count">
+                        <span id="resultsCount">0 results found</span>
+                    </div>
+                </div>
+                <div id="motorList" class="products-grid"></div>
+            </div>
+        </section>
+
+        <!-- Shops Section -->
+        <section id="shopsSection" class="hidden">
+            <div class="container">
+                <div class="section-header">
+                    <h2>🏪 Browse Motor Rental Shops</h2>
+                    <p>Discover trusted shops with quality motorcycles</p>
+                </div>
+                <div id="shopsList" class="shops-grid"></div>
+            </div>
+        </section>
+
+        <!-- Shop Details Section -->
+        <section id="shopDetailsSection" class="hidden">
+            <div class="container">
+                <button id="backToShops" class="back-btn">← Back to Shops</button>
+                <div id="shopHeader" class="shop-header"></div>
+                <div id="shopMotorcycles" class="products-grid"></div>
+            </div>
+        </section>
+
+        <!-- Open Shop Section -->
+        <section id="rentSection" class="hidden">
+            <div class="container">
+                <div class="seller-form">
+                    <h2>🏪 Open Your Motor Rental Shop</h2>
+                    <p class="form-subtitle">Create your own shop and start earning from motorcycle rentals</p>
+                    
+                    <div class="shop-setup">
+                        <h3>Shop Information</h3>
+                        <form id="shopForm">
+                            <div class="form-group">
+                                <label>Shop Name *</label>
+                                <input type="text" id="shopName" placeholder="e.g., Speed Demons Rental" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Shop Description *</label>
+                                <textarea id="shopDescription" placeholder="Describe your shop, services, and what makes you special..." required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Shop Logo</label>
+                                <input type="file" id="shopLogo" accept="image/*">
+                                <div class="image-preview" id="shopLogoPreview"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Location *</label>
+                                <input type="text" id="shopLocation" placeholder="e.g., Manila, Philippines" required>
+                            </div>
+                            <button type="submit" class="create-shop-btn">🏪 Create Shop</button>
+                        </form>
+                    </div>
+
+                    <div id="addMotorSection" class="hidden">
+                        <h3>Add Motorcycle to Your Shop</h3>
+                        <form id="rentForm">
+                            <div class="form-group">
+                                <label>Motorcycle Name *</label>
+                                <input type="text" id="motorName" placeholder="e.g., Yamaha R1, Honda CBR" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category *</label>
+                                <select id="motorCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="sport">Sport Bike</option>
+                                    <option value="cruiser">Cruiser</option>
+                                    <option value="touring">Touring</option>
+                                    <option value="scooter">Scooter</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Daily Rental Price *</label>
+                                <div class="price-input">
+                                    <span class="currency">₱</span>
+                                    <input type="number" id="motorPrice" placeholder="0" required>
+                                    <span class="per-day">/day</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Motorcycle Image *</label>
+                                <input type="file" id="motorImage" accept="image/*" required>
+                                <div class="image-preview" id="motorImagePreview"></div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description *</label>
+                                <textarea id="motorDescription" placeholder="Describe your motorcycle's features, condition, and any special requirements..." required></textarea>
+                            </div>
+                            <button type="submit" class="list-btn">📝 Add to My Shop</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for booking -->
+    <div id="bookingModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Book Motorcycle</h3>
+            <div id="bookingDetails"></div>
+            <form id="bookingForm">
+                <input type="date" id="startDate" required>
+                <input type="date" id="endDate" required>
+                <input type="text" id="renterName" placeholder="Your Name" required>
+                <input type="email" id="renterEmail" placeholder="Your Email" required>
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

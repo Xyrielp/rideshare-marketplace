@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Owner Dashboard - MotorRent</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="shop-owner.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="logo">
+                    <a href="../index.html">🏍️ MotorRent</a>
+                </div>
+                <div class="dashboard-nav">
+                    <span>Shop Owner Dashboard</span>
+                </div>
+                <div class="header-actions">
+                    <a href="../index.html" class="marketplace-btn">View Marketplace</a>
+                    <div class="user-menu">👤 Shop Owner</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="dashboard-sidebar">
+                <div class="sidebar-menu">
+                    <button class="menu-item active" data-section="overview">📊 Overview</button>
+                    <button class="menu-item" data-section="motorcycles">🏍️ My Motorcycles</button>
+                    <button class="menu-item" data-section="bookings">📅 Bookings</button>
+                    <button class="menu-item" data-section="shop-settings">⚙️ Shop Settings</button>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <!-- Overview Section -->
+                <section id="overview" class="dashboard-section">
+                    <h2>Dashboard Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🏍️</div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="totalMotorcycles">0</div>
+                                <div class="stat-label">Total Motorcycles</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="totalBookings">0</div>
+                                <div class="stat-label">Total Bookings</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="totalEarnings">₱0</div>
+                                <div class="stat-label">Total Earnings</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⭐</div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="shopRating">5.0</div>
+                                <div class="stat-label">Shop Rating</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-activity">
+                        <h3>Recent Activity</h3>
+                        <div id="activityList" class="activity-list">
+                            <div class="activity-item">
+                                <span class="activity-icon">🎉</span>
+                                <span class="activity-text">Welcome to your shop dashboard!</span>
+                                <span class="activity-time">Just now</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Motorcycles Section -->
+                <section id="motorcycles" class="dashboard-section hidden">
+                    <div class="section-header">
+                        <h2>My Motorcycles</h2>
+                        <button id="addMotorcycleBtn" class="add-btn">+ Add Motorcycle</button>
+                    </div>
+                    <div id="motorcyclesList" class="motorcycles-list"></div>
+                </section>
+
+                <!-- Bookings Section -->
+                <section id="bookings" class="dashboard-section hidden">
+                    <h2>Bookings Management</h2>
+                    <div class="bookings-filter">
+                        <select id="bookingFilter">
+                            <option value="all">All Bookings</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div id="bookingsList" class="bookings-list"></div>
+                </section>
+
+                <!-- Shop Settings Section -->
+                <section id="shop-settings" class="dashboard-section hidden">
+                    <h2>Shop Settings</h2>
+                    <form id="shopSettingsForm" class="settings-form">
+                        <div class="form-group">
+                            <label>Shop Name</label>
+                            <input type="text" id="settingsShopName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="settingsShopDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" id="settingsShopLocation" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Shop Logo</label>
+                            <input type="file" id="settingsShopLogo" accept="image/*">
+                            <div class="image-preview" id="logoPreview"></div>
+                        </div>
+                        <button type="submit" class="save-btn">Save Changes</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Motorcycle Modal -->
+    <div id="addMotorcycleModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Add New Motorcycle</h3>
+            <form id="addMotorcycleForm">
+                <div class="form-group">
+                    <label>Motorcycle Name *</label>
+                    <input type="text" id="newMotorName" required>
+                </div>
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="newMotorCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="sport">Sport Bike</option>
+                        <option value="cruiser">Cruiser</option>
+                        <option value="touring">Touring</option>
+                        <option value="scooter">Scooter</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Daily Price *</label>
+                    <div class="price-input">
+                        <span class="currency">₱</span>
+                        <input type="number" id="newMotorPrice" required>
+                        <span class="per-day">/day</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Motorcycle Image *</label>
+                    <input type="file" id="newMotorImage" accept="image/*" required>
+                    <div class="image-preview" id="newImagePreview"></div>
+                </div>
+                <div class="form-group">
+                    <label>Description *</label>
+                    <textarea id="newMotorDescription" required></textarea>
+                </div>
+                <button type="submit" class="add-motorcycle-btn">Add Motorcycle</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
