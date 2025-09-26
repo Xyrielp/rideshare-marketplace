@@ -323,16 +323,22 @@
         top: 0;
         min-height: auto;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .dashboard-main {
+        padding: 16px 0;
     }
     
     .dashboard-main .container {
         flex-direction: column;
-        padding: 0;
+        padding: 0 12px;
+        gap: 16px;
     }
     
     .dashboard-content {
         margin-left: 0;
-        padding: 16px;
+        padding: 0;
     }
     
     .sidebar-menu {
@@ -340,6 +346,12 @@
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         padding: 0 12px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .sidebar-menu::-webkit-scrollbar {
+        display: none;
     }
     
     .menu-item {
@@ -348,24 +360,39 @@
         border-bottom: 3px solid transparent;
         padding: 12px 16px;
         font-size: 13px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
     }
     
     .menu-item.active {
         border-left: none;
-        border-bottom-color: #3b82f6;
+        border-bottom-color: #ee4d2d;
     }
     
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        gap: 12px;
+        margin-bottom: 24px;
     }
     
     .stat-card {
         padding: 16px;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+    
+    .stat-icon {
+        font-size: 24px;
     }
     
     .stat-number {
-        font-size: 24px;
+        font-size: 20px;
+    }
+    
+    .stat-label {
+        font-size: 12px;
     }
     
     .table-row {
@@ -377,24 +404,37 @@
     
     .row-actions {
         width: 100%;
-        justify-content: flex-end;
+        justify-content: flex-start;
         flex-wrap: wrap;
+        gap: 8px;
     }
     
     .action-btn {
-        font-size: 11px;
-        padding: 6px 12px;
+        font-size: 12px;
+        padding: 8px 12px;
+        min-height: 36px;
+        min-width: 60px;
     }
     
     .section-header {
         flex-direction: column;
         gap: 12px;
         align-items: flex-start;
-        padding: 16px;
+        margin-bottom: 20px;
     }
     
     .section-header h2 {
         font-size: 20px;
+        margin: 0;
+    }
+    
+    .section-header select {
+        width: 100%;
+        min-height: 44px;
+    }
+    
+    .dashboard-section {
+        padding: 20px;
     }
     
     .dashboard-section h2 {
@@ -407,30 +447,73 @@
     }
     
     .recent-activity {
-        padding: 16px;
+        margin-top: 24px;
     }
     
     .activity-item {
         padding: 12px;
+        gap: 12px;
+    }
+    
+    .activity-icon {
+        font-size: 18px;
+        min-width: 32px;
+    }
+    
+    .activity-text {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    
+    .activity-time {
+        font-size: 12px;
     }
     
     .settings-form {
-        padding: 16px;
+        width: 100%;
+    }
+    
+    .save-btn {
+        width: 100%;
+        min-height: 44px;
     }
 }
 
 @media (max-width: 480px) {
+    .dashboard-main .container {
+        padding: 0 8px;
+    }
+    
+    .dashboard-section {
+        padding: 16px;
+    }
+    
     .stats-grid {
         grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .stat-card {
+        flex-direction: row;
+        text-align: left;
+        gap: 12px;
+        padding: 16px;
+    }
+    
+    .stat-icon {
+        font-size: 28px;
+        min-width: 40px;
     }
     
     .row-actions {
-        gap: 6px;
+        gap: 8px;
     }
     
     .action-btn {
-        font-size: 10px;
-        padding: 4px 8px;
+        font-size: 11px;
+        padding: 6px 10px;
+        min-height: 32px;
+        min-width: 50px;
     }
     
     .status-badge {
@@ -439,8 +522,21 @@
     }
     
     .activity-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 14px;
+        font-size: 16px;
+        min-width: 28px;
+    }
+    
+    .activity-text {
+        font-size: 13px;
+    }
+    
+    .menu-item {
+        padding: 10px 12px;
+        font-size: 12px;
+        min-height: 40px;
+    }
+    
+    .sidebar-menu {
+        gap: 4px;
     }
 }
