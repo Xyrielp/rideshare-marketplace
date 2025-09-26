@@ -3,171 +3,643 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Motor Rental Marketplace</title>
+    <title>RideShare - Premium Motorcycle Rentals</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="header-top">
-            <div class="container">
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenuOverlay" class="mobile-menu-overlay hidden">
+        <div class="mobile-menu">
+            <div class="mobile-menu-header">
+                <h3>Menu</h3>
+                <button id="closeMobileMenu" class="close-btn">×</button>
+            </div>
+            <nav class="mobile-nav">
+                <a href="#" class="mobile-nav-link" data-section="home">🏍️ Browse Bikes</a>
+                <a href="#" class="mobile-nav-link" data-section="shops">🏪 All Shops</a>
+                <a href="#" class="mobile-nav-link" data-section="favorites">❤️ Favorites</a>
+                <a href="#" class="mobile-nav-link" data-section="rent">🚀 List Your Bike</a>
+                <a href="shop-owners/dashboard.html" class="mobile-nav-link">📊 Dashboard</a>
+                <a href="admin/dashboard.html" class="mobile-nav-link">⚙️ Admin</a>
+            </nav>
+            <div class="mobile-auth">
+                <button id="mobileLoginBtn" class="mobile-login-btn">Sign In</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-container">
+            <div class="header-left">
+                <button id="mobileMenuBtn" class="mobile-menu-btn">☰</button>
                 <div class="logo">
-                    <h1>🏍️ MotorRent</h1>
+                    <span class="logo-icon">🏍️</span>
+                    <span class="logo-text">RideShare</span>
                 </div>
-                <div class="search-container">
-                    <input type="text" id="searchInput" placeholder="Search for motorcycles, brands, models...">
+            </div>
+            
+            <div class="search-bar">
+                <div class="search-input-container">
+                    <input type="text" id="searchInput" placeholder="Search bikes, locations..." class="search-input">
                     <button class="search-btn">🔍</button>
                 </div>
-                <div class="header-actions">
-                    <button id="rentBtn" class="sell-btn">Open Shop</button>
-                    <button id="storesBtn" class="stores-btn">Browse Shops</button>
-                    <a href="shop-owners/dashboard.html" class="dashboard-btn">Dashboard</a>
-                    <div class="cart-icon">🛒</div>
+            </div>
+            
+            <div class="header-right">
+                <button id="favoritesBtn" class="header-btn favorites-btn">
+                    <span class="btn-icon">❤️</span>
+                    <span class="btn-text">Favorites</span>
+                </button>
+                <button id="loginBtn" class="header-btn login-btn">
+                    <span class="btn-text">Sign In</span>
+                </button>
+                <button id="rentBtn" class="header-btn rent-btn">
+                    <span class="btn-text">List Bike</span>
+                </button>
+                <div class="user-profile hidden" id="userProfile">
+                    <div class="user-avatar">👤</div>
+                    <span id="userName"></span>
+                    <button id="logoutBtn" class="logout-btn">Sign Out</button>
                 </div>
             </div>
         </div>
-        <nav class="nav-bar">
-            <div class="container">
-                <button id="homeBtn" class="nav-link active">All Motorcycles</button>
-                <button id="shopsBtn" class="nav-link">All Shops</button>
-                <button class="nav-link" data-category="sport">Sport Bikes</button>
-                <button class="nav-link" data-category="cruiser">Cruisers</button>
-                <button class="nav-link" data-category="touring">Touring</button>
-                <button class="nav-link" data-category="scooter">Scooters</button>
+        
+        <nav class="category-nav">
+            <div class="nav-container">
+                <button id="homeBtn" class="nav-btn active" data-section="home">All Bikes</button>
+                <button id="shopsBtn" class="nav-btn" data-section="shops">Shops</button>
+                <button class="nav-btn" data-category="sport">Sport</button>
+                <button class="nav-btn" data-category="cruiser">Cruiser</button>
+                <button class="nav-btn" data-category="touring">Touring</button>
+                <button class="nav-btn" data-category="scooter">Scooter</button>
             </div>
         </nav>
     </header>
 
-    <main>
-        <!-- Home Section -->
-        <section id="homeSection">
-            <div class="container">
-                <div class="filters-section">
-                    <div class="sort-options">
-                        <span>Sort by:</span>
-                        <select id="sortFilter">
-                            <option value="">Relevance</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
-                            <option value="newest">Newest First</option>
-                        </select>
-                    </div>
-                    <div class="results-count">
-                        <span id="resultsCount">0 results found</span>
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Find Your Perfect Ride</h1>
+                <p class="hero-subtitle">Rent premium motorcycles from trusted local shops</p>
+                <div class="hero-search">
+                    <div class="hero-search-input">
+                        <input type="text" placeholder="Where do you want to ride?" class="hero-input">
+                        <button class="hero-search-btn">Search Bikes</button>
                     </div>
                 </div>
-                <div id="motorList" class="products-grid"></div>
+            </div>
+        </section>
+
+        <!-- Home Section -->
+        <section id="homeSection" class="section">
+            <div class="container">
+                <!-- Quick Filters -->
+                <div class="quick-filters">
+                    <button class="filter-chip active" data-filter="all">All</button>
+                    <button class="filter-chip" data-filter="available">Available Today</button>
+                    <button class="filter-chip" data-filter="nearby">Near Me</button>
+                    <button class="filter-chip" data-filter="budget">Under ₱1000</button>
+                    <button class="filter-chip" data-filter="premium">Premium</button>
+                </div>
+
+                <!-- Advanced Filters -->
+                <div class="filters-container">
+                    <button id="toggleFilters" class="toggle-filters-btn">
+                        <span>Filters</span>
+                        <span class="filter-icon">⚙️</span>
+                    </button>
+                    
+                    <div id="advancedFilters" class="advanced-filters hidden">
+                        <div class="filters-grid">
+                            <div class="filter-group">
+                                <label class="filter-label">Price Range</label>
+                                <div class="price-range-container">
+                                    <input type="range" id="minPrice" min="0" max="10000" value="0" class="range-input">
+                                    <input type="range" id="maxPrice" min="0" max="10000" value="10000" class="range-input">
+                                    <div class="price-display">
+                                        <span class="price-value">₱<span id="minPriceValue">0</span></span>
+                                        <span class="price-value">₱<span id="maxPriceValue">10000</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label class="filter-label">Location</label>
+                                <select id="locationFilter" class="filter-select">
+                                    <option value="">All Locations</option>
+                                    <option value="Manila">Manila</option>
+                                    <option value="Cebu">Cebu</option>
+                                    <option value="Davao">Davao</option>
+                                    <option value="Bohol">Bohol</option>
+                                    <option value="Palawan">Palawan</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label class="filter-label">Available From</label>
+                                <input type="date" id="availabilityDate" class="filter-input">
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label class="filter-label">Sort By</label>
+                                <select id="sortFilter" class="filter-select">
+                                    <option value="">Relevance</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="rating">Highest Rated</option>
+                                    <option value="newest">Newest First</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-actions">
+                            <button id="clearFilters" class="clear-btn">Clear All</button>
+                            <button id="applyFilters" class="apply-btn">Apply Filters</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Header -->
+                <div class="results-header">
+                    <div class="results-info">
+                        <span id="resultsCount" class="results-count">0 bikes available</span>
+                    </div>
+                    <div class="view-toggle">
+                        <button id="gridView" class="view-btn active">⊞</button>
+                        <button id="listView" class="view-btn">☰</button>
+                    </div>
+                </div>
+
+                <!-- Bikes Grid -->
+                <div id="motorList" class="bikes-grid"></div>
+                
+                <!-- Load More -->
+                <div class="load-more-container">
+                    <button id="loadMore" class="load-more-btn hidden">Load More Bikes</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Favorites Section -->
+        <section id="favoritesSection" class="section hidden">
+            <div class="container">
+                <div class="section-header">
+                    <button class="back-btn" onclick="showSection('home')">← Back</button>
+                    <h2 class="section-title">❤️ Your Favorites</h2>
+                    <p class="section-subtitle">Bikes you've saved for later</p>
+                </div>
+                <div id="favoritesList" class="bikes-grid"></div>
+                <div id="emptyFavorites" class="empty-state hidden">
+                    <div class="empty-icon">💔</div>
+                    <h3>No favorites yet</h3>
+                    <p>Start browsing and save bikes you love!</p>
+                    <button onclick="showSection('home')" class="cta-btn">Browse Bikes</button>
+                </div>
             </div>
         </section>
 
         <!-- Shops Section -->
-        <section id="shopsSection" class="hidden">
+        <section id="shopsSection" class="section hidden">
             <div class="container">
                 <div class="section-header">
-                    <h2>🏪 Browse Motor Rental Shops</h2>
-                    <p>Discover trusted shops with quality motorcycles</p>
+                    <button class="back-btn" onclick="showSection('home')">← Back</button>
+                    <h2 class="section-title">🏪 Rental Shops</h2>
+                    <p class="section-subtitle">Discover trusted shops with quality motorcycles</p>
                 </div>
+                
+                <!-- Shop Filters -->
+                <div class="shop-filters">
+                    <div class="shop-filter-chips">
+                        <button class="filter-chip active" data-shop-filter="all">All Shops</button>
+                        <button class="filter-chip" data-shop-filter="verified">✓ Verified</button>
+                        <button class="filter-chip" data-shop-filter="top-rated">⭐ Top Rated</button>
+                        <button class="filter-chip" data-shop-filter="nearby">📍 Near Me</button>
+                    </div>
+                </div>
+                
                 <div id="shopsList" class="shops-grid"></div>
             </div>
         </section>
 
         <!-- Shop Details Section -->
-        <section id="shopDetailsSection" class="hidden">
+        <section id="shopDetailsSection" class="section hidden">
             <div class="container">
                 <button id="backToShops" class="back-btn">← Back to Shops</button>
-                <div id="shopHeader" class="shop-header"></div>
-                <div id="shopMotorcycles" class="products-grid"></div>
+                <div id="shopHeader" class="shop-detail-header"></div>
+                
+                <!-- Shop Stats -->
+                <div class="shop-stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="shopBikeCount">0</div>
+                        <div class="stat-label">Bikes Available</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="shopRating">0.0</div>
+                        <div class="stat-label">Average Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="shopReviews">0</div>
+                        <div class="stat-label">Reviews</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="shopYears">0</div>
+                        <div class="stat-label">Years Active</div>
+                    </div>
+                </div>
+                
+                <div class="shop-bikes-section">
+                    <h3 class="section-subtitle">Available Motorcycles</h3>
+                    <div id="shopMotorcycles" class="bikes-grid"></div>
+                </div>
             </div>
         </section>
 
-        <!-- Open Shop Section -->
-        <section id="rentSection" class="hidden">
+        <!-- List Bike Section -->
+        <section id="rentSection" class="section hidden">
             <div class="container">
-                <div class="seller-form">
-                    <h2>🏪 Open Your Motor Rental Shop</h2>
-                    <p class="form-subtitle">Create your own shop and start earning from motorcycle rentals</p>
-                    
-                    <div class="shop-setup">
-                        <h3>Shop Information</h3>
-                        <form id="shopForm">
-                            <div class="form-group">
-                                <label>Shop Name *</label>
-                                <input type="text" id="shopName" placeholder="e.g., Speed Demons Rental" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Shop Description *</label>
-                                <textarea id="shopDescription" placeholder="Describe your shop, services, and what makes you special..." required></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Shop Logo</label>
-                                <input type="file" id="shopLogo" accept="image/*">
-                                <div class="image-preview" id="shopLogoPreview"></div>
-                            </div>
-                            <div class="form-group">
-                                <label>Location *</label>
-                                <input type="text" id="shopLocation" placeholder="e.g., Manila, Philippines" required>
-                            </div>
-                            <button type="submit" class="create-shop-btn">🏪 Create Shop</button>
-                        </form>
+                <div class="form-container">
+                    <div class="form-header">
+                        <button class="back-btn" onclick="showSection('home')">← Back</button>
+                        <h2 class="form-title">🚀 List Your Motorcycle</h2>
+                        <p class="form-subtitle">Join our marketplace and start earning from your bike</p>
                     </div>
-
-                    <div id="addMotorSection" class="hidden">
-                        <h3>Add Motorcycle to Your Shop</h3>
-                        <form id="rentForm">
-                            <div class="form-group">
-                                <label>Motorcycle Name *</label>
-                                <input type="text" id="motorName" placeholder="e.g., Yamaha R1, Honda CBR" required>
-                            </div>
-                            <div class="form-group">
-                                <label>Category *</label>
-                                <select id="motorCategory" required>
-                                    <option value="">Select Category</option>
-                                    <option value="sport">Sport Bike</option>
-                                    <option value="cruiser">Cruiser</option>
-                                    <option value="touring">Touring</option>
-                                    <option value="scooter">Scooter</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Daily Rental Price *</label>
-                                <div class="price-input">
-                                    <span class="currency">₱</span>
-                                    <input type="number" id="motorPrice" placeholder="0" required>
-                                    <span class="per-day">/day</span>
+                    
+                    <!-- Progress Steps -->
+                    <div class="progress-steps">
+                        <div class="step active" data-step="1">
+                            <div class="step-number">1</div>
+                            <div class="step-label">Shop Info</div>
+                        </div>
+                        <div class="step" data-step="2">
+                            <div class="step-number">2</div>
+                            <div class="step-label">Bike Details</div>
+                        </div>
+                        <div class="step" data-step="3">
+                            <div class="step-number">3</div>
+                            <div class="step-label">Pricing</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 1: Shop Setup -->
+                    <div id="step1" class="form-step active">
+                        <div class="step-content">
+                            <h3 class="step-title">Create Your Shop</h3>
+                            <form id="shopForm" class="form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Shop Name *</label>
+                                        <input type="text" id="shopName" class="form-input" placeholder="e.g., Manila Bike Rentals" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Location *</label>
+                                        <input type="text" id="shopLocation" class="form-input" placeholder="e.g., Makati, Manila" required>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Motorcycle Image *</label>
-                                <input type="file" id="motorImage" accept="image/*" required>
-                                <div class="image-preview" id="motorImagePreview"></div>
-                            </div>
-                            <div class="form-group">
-                                <label>Description *</label>
-                                <textarea id="motorDescription" placeholder="Describe your motorcycle's features, condition, and any special requirements..." required></textarea>
-                            </div>
-                            <button type="submit" class="list-btn">📝 Add to My Shop</button>
-                        </form>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Shop Description *</label>
+                                    <textarea id="shopDescription" class="form-textarea" placeholder="Tell customers about your shop, services, and what makes you special..." required></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Shop Logo (Optional)</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="shopLogo" accept="image/*" class="file-input">
+                                        <div class="file-upload-area" id="shopLogoPreview">
+                                            <div class="upload-placeholder">
+                                                <span class="upload-icon">📷</span>
+                                                <span class="upload-text">Click to upload logo</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button type="button" onclick="nextStep(2)" class="next-btn">Continue →</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Bike Details -->
+                    <div id="step2" class="form-step">
+                        <div class="step-content">
+                            <h3 class="step-title">Add Your Motorcycle</h3>
+                            <form id="bikeForm" class="form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label class="form-label">Bike Name *</label>
+                                        <input type="text" id="motorName" class="form-input" placeholder="e.g., Yamaha NMAX 155" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Category *</label>
+                                        <select id="motorCategory" class="form-select" required>
+                                            <option value="">Select Category</option>
+                                            <option value="scooter">Scooter</option>
+                                            <option value="sport">Sport Bike</option>
+                                            <option value="cruiser">Cruiser</option>
+                                            <option value="touring">Touring</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Bike Photos *</label>
+                                    <div class="file-upload">
+                                        <input type="file" id="motorImage" accept="image/*" multiple class="file-input">
+                                        <div class="file-upload-area" id="motorImagePreview">
+                                            <div class="upload-placeholder">
+                                                <span class="upload-icon">📸</span>
+                                                <span class="upload-text">Upload bike photos</span>
+                                                <span class="upload-hint">Add multiple photos for better visibility</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Description *</label>
+                                    <textarea id="motorDescription" class="form-textarea" placeholder="Describe your bike's condition, features, and any special requirements..." required></textarea>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" onclick="prevStep(1)" class="prev-btn">← Back</button>
+                                    <button type="button" onclick="nextStep(3)" class="next-btn">Continue →</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Pricing -->
+                    <div id="step3" class="form-step">
+                        <div class="step-content">
+                            <h3 class="step-title">Set Your Pricing</h3>
+                            <form id="pricingForm" class="form">
+                                <div class="pricing-grid">
+                                    <div class="form-group">
+                                        <label class="form-label">Daily Rate *</label>
+                                        <div class="price-input-container">
+                                            <span class="currency-symbol">₱</span>
+                                            <input type="number" id="motorPrice" class="price-input" placeholder="1500" required>
+                                            <span class="price-period">/day</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="form-label">Weekly Rate (Optional)</label>
+                                        <div class="price-input-container">
+                                            <span class="currency-symbol">₱</span>
+                                            <input type="number" id="weeklyPrice" class="price-input" placeholder="9000">
+                                            <span class="price-period">/week</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="pricing-tips">
+                                    <h4>💡 Pricing Tips</h4>
+                                    <ul>
+                                        <li>Research similar bikes in your area</li>
+                                        <li>Consider your bike's condition and features</li>
+                                        <li>Offer weekly discounts to attract longer rentals</li>
+                                        <li>You can always adjust prices later</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="form-actions">
+                                    <button type="button" onclick="prevStep(2)" class="prev-btn">← Back</button>
+                                    <button type="submit" class="submit-btn">🚀 List My Bike</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Modal for booking -->
+    <!-- Booking Modal -->
     <div id="bookingModal" class="modal hidden">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <h3>Book Motorcycle</h3>
-            <div id="bookingDetails"></div>
-            <form id="bookingForm">
-                <input type="date" id="startDate" required>
-                <input type="date" id="endDate" required>
-                <input type="text" id="renterName" placeholder="Your Name" required>
-                <input type="email" id="renterEmail" placeholder="Your Email" required>
-                <button type="submit">Book Now</button>
-            </form>
+            <div class="modal-header">
+                <h3 class="modal-title">Book This Bike</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div id="bookingDetails" class="booking-bike-info"></div>
+                
+                <!-- Date Selection -->
+                <div class="booking-section">
+                    <h4 class="section-title">Select Dates</h4>
+                    <div class="date-selection">
+                        <div class="date-group">
+                            <label class="date-label">Pick-up Date</label>
+                            <input type="date" id="startDate" class="date-input" required>
+                        </div>
+                        <div class="date-group">
+                            <label class="date-label">Return Date</label>
+                            <input type="date" id="endDate" class="date-input" required>
+                        </div>
+                    </div>
+                    
+                    <div class="rental-summary">
+                        <div class="summary-row">
+                            <span>Duration:</span>
+                            <span id="rentalDays" class="summary-value">0 days</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total Cost:</span>
+                            <span id="totalCost" class="summary-value">₱0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="booking-section">
+                    <h4 class="section-title">Your Information</h4>
+                    <form id="bookingForm" class="booking-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Full Name *</label>
+                                <input type="text" id="renterName" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Phone *</label>
+                                <input type="tel" id="renterPhone" class="form-input" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" id="renterEmail" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Special Requests (Optional)</label>
+                            <textarea id="specialRequests" class="form-textarea" placeholder="Any special requirements or requests..."></textarea>
+                        </div>
+                        
+                        <!-- Payment Method -->
+                        <div class="payment-section">
+                            <h5 class="payment-title">Payment Method</h5>
+                            <div class="payment-options">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="pickup" checked>
+                                    <span class="payment-label">💰 Pay at Pickup</span>
+                                    <span class="payment-desc">Pay directly to the shop owner</span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment" value="online">
+                                    <span class="payment-label">💳 Pay Online</span>
+                                    <span class="payment-desc">Secure online payment (Coming Soon)</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="book-btn-primary">Confirm Booking</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="loginModal" class="modal hidden">
+        <div class="modal-content auth-modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Welcome to RideShare</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Sign In</button>
+                <button class="auth-tab" data-tab="register">Sign Up</button>
+            </div>
+            
+            <div class="modal-body">
+                <div id="loginForm" class="auth-form">
+                    <form class="form">
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-input" placeholder="••••••••" required>
+                        </div>
+                        <button type="submit" class="auth-btn">Sign In</button>
+                    </form>
+                    
+                    <div class="auth-divider">
+                        <span>or continue with</span>
+                    </div>
+                    
+                    <div class="social-auth">
+                        <button class="social-btn google-btn">🔍 Google</button>
+                        <button class="social-btn facebook-btn">📘 Facebook</button>
+                    </div>
+                </div>
+                
+                <div id="registerForm" class="auth-form hidden">
+                    <form class="form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">First Name</label>
+                                <input type="text" class="form-input" placeholder="John" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Last Name</label>
+                                <input type="text" class="form-input" placeholder="Doe" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-input" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" placeholder="+63 9XX XXX XXXX" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" placeholder="••••••••" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Confirm Password</label>
+                                <input type="password" class="form-input" placeholder="••••••••" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="auth-btn">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div id="reviewModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Rate Your Experience</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <div id="reviewDetails" class="review-bike-info"></div>
+                
+                <form id="reviewForm" class="review-form">
+                    <div class="rating-section">
+                        <label class="form-label">Your Rating</label>
+                        <div class="star-rating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                        <div class="rating-labels">
+                            <span class="rating-label">Poor</span>
+                            <span class="rating-label">Excellent</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Your Review</label>
+                        <textarea id="reviewText" class="form-textarea" placeholder="Share your experience with this bike and the rental service..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-review-btn">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal hidden">
+        <div class="modal-content success-modal">
+            <div class="success-content">
+                <div class="success-icon">✅</div>
+                <h3 class="success-title">Success!</h3>
+                <p id="successMessage" class="success-message">Your action was completed successfully.</p>
+                <button id="successOk" class="success-btn">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-spinner">
+            <div class="spinner"></div>
+            <p class="loading-text">Loading...</p>
         </div>
     </div>
 
     <script src="script.js"></script>
+    <script src="auth.js"></script>
+    <script src="favorites.js"></script>
+    <script src="reviews.js"></script>
 </body>
 </html>

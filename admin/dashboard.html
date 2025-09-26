@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - MotorRent</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="logo">
+                    <a href="../index.html">🏍️ MotorRent</a>
+                </div>
+                <div class="dashboard-nav">
+                    <span>Admin Dashboard</span>
+                </div>
+                <div class="header-actions">
+                    <a href="../index.html" class="marketplace-btn">View Marketplace</a>
+                    <div class="user-menu">👤 Administrator</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="dashboard-sidebar">
+                <div class="sidebar-menu">
+                    <button class="menu-item active" data-section="overview">📊 Overview</button>
+                    <button class="menu-item" data-section="shops">🏪 Manage Shops</button>
+                    <button class="menu-item" data-section="motorcycles">🏍️ All Motorcycles</button>
+                    <button class="menu-item" data-section="bookings">📅 All Bookings</button>
+                    <button class="menu-item" data-section="users">👥 Users</button>
+                    <button class="menu-item" data-section="settings">⚙️ Settings</button>
+                </div>
+            </div>
+
+            <div class="dashboard-content">
+                <!-- Overview Section -->
+                <section id="overview" class="dashboard-section">
+                    <h2>Admin Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🏪</div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="totalShops">3</div>
+                                <div class="stat-label">Total Shops</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🏍️</div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="totalMotorcycles">15</div>
+                                <div class="stat-label">Total Motorcycles</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📅</div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="totalBookings">28</div>
+                                <div class="stat-label">Total Bookings</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">💰</div>
+                            <div class="stat-info">
+                                <div class="stat-number" id="totalRevenue">₱125,000</div>
+                                <div class="stat-label">Total Revenue</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recent-activity">
+                        <h3>Recent Platform Activity</h3>
+                        <div id="activityList" class="activity-list">
+                            <div class="activity-item">
+                                <span class="activity-icon">🏪</span>
+                                <span class="activity-text">New shop "Speed Demons" registered</span>
+                                <span class="activity-time">2 hours ago</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-icon">📅</span>
+                                <span class="activity-text">5 new bookings today</span>
+                                <span class="activity-time">4 hours ago</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Shops Management -->
+                <section id="shops" class="dashboard-section hidden">
+                    <div class="section-header">
+                        <h2>Manage Shops</h2>
+                        <select id="shopStatusFilter">
+                            <option value="">All Shops</option>
+                            <option value="active">Active</option>
+                            <option value="pending">Pending</option>
+                            <option value="suspended">Suspended</option>
+                        </select>
+                    </div>
+                    <div id="shopsList" class="admin-table"></div>
+                </section>
+
+                <!-- Motorcycles Management -->
+                <section id="motorcycles" class="dashboard-section hidden">
+                    <div class="section-header">
+                        <h2>All Motorcycles</h2>
+                        <select id="motorcycleFilter">
+                            <option value="">All Categories</option>
+                            <option value="sport">Sport</option>
+                            <option value="cruiser">Cruiser</option>
+                            <option value="touring">Touring</option>
+                            <option value="scooter">Scooter</option>
+                        </select>
+                    </div>
+                    <div id="motorcyclesList" class="admin-table"></div>
+                </section>
+
+                <!-- Bookings Management -->
+                <section id="bookings" class="dashboard-section hidden">
+                    <h2>All Bookings</h2>
+                    <div class="bookings-filter">
+                        <select id="bookingStatusFilter">
+                            <option value="">All Bookings</option>
+                            <option value="pending">Pending</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                    <div id="bookingsList" class="admin-table"></div>
+                </section>
+
+                <!-- Users Management -->
+                <section id="users" class="dashboard-section hidden">
+                    <div class="section-header">
+                        <h2>User Management</h2>
+                        <select id="userTypeFilter">
+                            <option value="">All Users</option>
+                            <option value="customer">Customers</option>
+                            <option value="shop-owner">Shop Owners</option>
+                        </select>
+                    </div>
+                    <div id="usersList" class="admin-table"></div>
+                </section>
+
+                <!-- System Settings -->
+                <section id="settings" class="dashboard-section hidden">
+                    <h2>System Settings</h2>
+                    <form id="systemSettingsForm" class="settings-form">
+                        <div class="form-group">
+                            <label>Platform Commission (%)</label>
+                            <input type="number" id="platformCommission" value="10" min="0" max="50">
+                        </div>
+                        <div class="form-group">
+                            <label>Auto-approve Shops</label>
+                            <select id="autoApproveShops">
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="save-btn">Save Settings</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <script src="admin.js"></script>
+</body>
+</html>
