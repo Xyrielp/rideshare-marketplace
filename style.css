@@ -6,51 +6,67 @@
 }
 
 :root {
-    --primary-color: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary-color: #f59e0b;
-    --success-color: #10b981;
-    --danger-color: #ef4444;
-    --warning-color: #f59e0b;
-    --text-primary: #111827;
-    --text-secondary: #6b7280;
-    --text-light: #9ca3af;
+    --primary-color: #000000;
+    --primary-hover: #333333;
+    --accent-color: #ff6b35;
+    --success-color: #00c851;
+    --danger-color: #ff4444;
+    --warning-color: #ffbb33;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --text-light: #999999;
+    --text-muted: #cccccc;
     --bg-primary: #ffffff;
-    --bg-secondary: #f9fafb;
-    --bg-tertiary: #f3f4f6;
-    --border-color: #e5e7eb;
-    --border-light: #f3f4f6;
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-    --radius-sm: 0.375rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
+    --bg-secondary: #fafafa;
+    --bg-tertiary: #f5f5f5;
+    --border-color: #e0e0e0;
+    --border-light: #f0f0f0;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 16px rgba(0,0,0,0.1);
+    --shadow-xl: 0 8px 32px rgba(0,0,0,0.15);
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 8px;
+    --radius-xl: 12px;
+    --transition: all 0.2s ease;
 }
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
+    line-height: 1.5;
     color: var(--text-primary);
-    background-color: var(--bg-secondary);
+    background-color: var(--bg-primary);
     font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 0 16px;
 }
 
-/* Header Styles */
+@media (min-width: 768px) {
+    .container {
+        padding: 0 24px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .container {
+        padding: 0 32px;
+    }
+}
+
+/* Header Styles - Zalora-inspired */
 .header {
     background: var(--bg-primary);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1000;
     box-shadow: var(--shadow-sm);
 }
 
@@ -58,72 +74,82 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem 1rem;
-    gap: 1rem;
+    padding: 12px 16px;
+    gap: 16px;
+    min-height: 60px;
 }
 
 .header-left {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 16px;
 }
 
 .mobile-menu-btn {
     display: none;
     background: none;
     border: none;
-    font-size: 1.25rem;
+    font-size: 18px;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 8px;
     border-radius: var(--radius-md);
-    color: var(--text-secondary);
+    color: var(--text-primary);
+    transition: var(--transition);
+    min-width: 40px;
+    min-height: 40px;
 }
 
 .mobile-menu-btn:hover {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
+    background: var(--bg-secondary);
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-weight: 700;
-    font-size: 1.25rem;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 20px;
     color: var(--primary-color);
     text-decoration: none;
+    letter-spacing: -0.5px;
 }
 
 .logo-icon {
-    font-size: 1.5rem;
+    font-size: 24px;
+}
+
+.logo-text {
+    font-weight: 700;
 }
 
 .search-bar {
     flex: 1;
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .search-input-container {
     display: flex;
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: 24px;
     overflow: hidden;
-    transition: all 0.2s;
+    transition: var(--transition);
+    height: 40px;
 }
 
 .search-input-container:focus-within {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
 }
 
 .search-input {
     flex: 1;
-    padding: 0.75rem 1rem;
+    padding: 0 16px;
     border: none;
     background: transparent;
-    font-size: 0.875rem;
+    font-size: 14px;
     outline: none;
+    color: var(--text-primary);
 }
 
 .search-input::placeholder {
@@ -134,71 +160,72 @@ body {
     background: var(--primary-color);
     color: white;
     border: none;
-    padding: 0.75rem 1rem;
+    padding: 0 16px;
     cursor: pointer;
-    font-size: 0.875rem;
-    transition: background 0.2s;
+    font-size: 14px;
+    transition: var(--transition);
+    min-width: 48px;
 }
 
 .search-btn:hover {
-    background: var(--primary-dark);
+    background: var(--primary-hover);
 }
 
 .header-right {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 8px;
 }
 
 .header-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid var(--border-color);
-    background: var(--bg-primary);
+    gap: 6px;
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
     color: var(--text-primary);
     border-radius: var(--radius-md);
     cursor: pointer;
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 500;
-    transition: all 0.2s;
+    transition: var(--transition);
     text-decoration: none;
+    min-height: 40px;
 }
 
 .header-btn:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--primary-color);
+    background: var(--bg-secondary);
 }
 
 .favorites-btn {
-    color: var(--danger-color);
-    border-color: var(--danger-color);
+    position: relative;
 }
 
-.favorites-btn:hover {
-    background: var(--danger-color);
-    color: white;
+.favorites-btn .btn-icon {
+    font-size: 18px;
 }
 
 .login-btn {
     background: var(--primary-color);
     color: white;
-    border-color: var(--primary-color);
+    border-radius: 20px;
+    padding: 8px 20px;
 }
 
 .login-btn:hover {
-    background: var(--primary-dark);
+    background: var(--primary-hover);
 }
 
 .rent-btn {
-    background: var(--success-color);
+    background: var(--accent-color);
     color: white;
-    border-color: var(--success-color);
+    border-radius: 20px;
+    padding: 8px 20px;
 }
 
 .rent-btn:hover {
-    background: #059669;
+    background: #e55a2b;
 }
 
 .user-profile {
@@ -232,7 +259,7 @@ body {
     cursor: pointer;
 }
 
-/* Category Navigation */
+/* Category Navigation - Zalora style */
 .category-nav {
     background: var(--bg-primary);
     border-top: 1px solid var(--border-light);
@@ -247,8 +274,8 @@ body {
 
 .nav-container {
     display: flex;
-    gap: 2rem;
-    padding: 0.75rem 1rem;
+    gap: 32px;
+    padding: 16px;
     min-width: max-content;
 }
 
@@ -256,13 +283,15 @@ body {
     background: none;
     border: none;
     color: var(--text-secondary);
-    font-size: 0.875rem;
+    font-size: 14px;
     font-weight: 500;
     cursor: pointer;
-    padding: 0.5rem 0;
+    padding: 8px 0;
     position: relative;
-    transition: color 0.2s;
+    transition: var(--transition);
     white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .nav-btn:hover,
@@ -273,24 +302,31 @@ body {
 .nav-btn.active::after {
     content: '';
     position: absolute;
-    bottom: -0.75rem;
+    bottom: -16px;
     left: 0;
     right: 0;
     height: 2px;
     background: var(--primary-color);
-    border-radius: 1px;
 }
 
-/* Mobile Menu */
+/* Mobile Menu - Zalora Style */
 .mobile-menu-overlay {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 200;
-    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2000;
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
 }
 
 .mobile-menu {
@@ -298,11 +334,13 @@ body {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 280px;
+    width: 300px;
     background: var(--bg-primary);
     box-shadow: var(--shadow-xl);
     transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
 }
 
 .mobile-menu-overlay:not(.hidden) .mobile-menu {
@@ -313,46 +351,71 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
-    border-bottom: 1px solid var(--border-color);
+    padding: 20px 16px;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-secondary);
 }
 
 .mobile-menu-header h3 {
-    font-size: 1.125rem;
+    font-size: 18px;
     font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
 }
 
 .close-btn {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 24px;
     cursor: pointer;
     color: var(--text-secondary);
-    padding: 0.25rem;
+    padding: 4px;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+    min-width: 32px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
 }
 
 .mobile-nav {
-    padding: 1rem 0;
+    flex: 1;
+    padding: 16px 0;
+    overflow-y: auto;
 }
 
 .mobile-nav-link {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    gap: 12px;
+    padding: 16px 20px;
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
-    transition: background 0.2s;
+    font-size: 14px;
+    transition: var(--transition);
+    border-left: 3px solid transparent;
 }
 
 .mobile-nav-link:hover {
+    background: var(--bg-secondary);
+    border-left-color: var(--primary-color);
+}
+
+.mobile-nav-link:active {
     background: var(--bg-tertiary);
 }
 
 .mobile-auth {
-    padding: 1rem;
-    border-top: 1px solid var(--border-color);
+    padding: 16px;
+    border-top: 1px solid var(--border-light);
+    background: var(--bg-secondary);
 }
 
 .mobile-login-btn {
@@ -360,10 +423,21 @@ body {
     background: var(--primary-color);
     color: white;
     border: none;
-    padding: 0.75rem;
-    border-radius: var(--radius-md);
-    font-weight: 500;
+    padding: 12px 16px;
+    border-radius: 24px;
+    font-weight: 600;
     cursor: pointer;
+    font-size: 14px;
+    transition: var(--transition);
+    min-height: 44px;
+}
+
+.mobile-login-btn:hover {
+    background: var(--primary-hover);
+}
+
+.mobile-login-btn:active {
+    transform: scale(0.98);
 }
 
 /* Main Content */
@@ -371,66 +445,73 @@ body {
     min-height: calc(100vh - 120px);
 }
 
-/* Hero Section */
+/* Hero Section - Zalora inspired */
 .hero-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-    color: white;
-    padding: 3rem 1rem;
-    text-align: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    padding: 40px 0;
+    border-bottom: 1px solid var(--border-light);
 }
 
 .hero-content {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
+    text-align: center;
+    padding: 0 16px;
 }
 
 .hero-title {
-    font-size: 2.5rem;
+    font-size: 32px;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 12px;
     line-height: 1.2;
+    color: var(--text-primary);
+    letter-spacing: -1px;
 }
 
 .hero-subtitle {
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
+    font-size: 16px;
+    margin-bottom: 32px;
+    color: var(--text-secondary);
+    font-weight: 400;
 }
 
 .hero-search {
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
 }
 
 .hero-search-input {
     display: flex;
     background: white;
-    border-radius: var(--radius-lg);
+    border: 2px solid var(--border-color);
+    border-radius: 24px;
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-md);
+    height: 48px;
 }
 
 .hero-input {
     flex: 1;
-    padding: 1rem;
+    padding: 0 20px;
     border: none;
-    font-size: 1rem;
+    font-size: 14px;
     outline: none;
     color: var(--text-primary);
 }
 
 .hero-search-btn {
-    background: var(--secondary-color);
+    background: var(--primary-color);
     color: white;
     border: none;
-    padding: 1rem 1.5rem;
+    padding: 0 24px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: var(--transition);
+    font-size: 14px;
 }
 
 .hero-search-btn:hover {
-    background: #d97706;
+    background: var(--primary-hover);
 }
 
 /* Section Styles */
@@ -473,13 +554,13 @@ body {
     border-color: var(--primary-color);
 }
 
-/* Quick Filters */
+/* Quick Filters - Zalora style */
 .quick-filters {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    gap: 8px;
+    margin: 24px 0;
     overflow-x: auto;
-    padding-bottom: 0.5rem;
+    padding: 0 16px 8px;
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
@@ -490,53 +571,68 @@ body {
 
 .filter-chip {
     background: var(--bg-primary);
-    color: var(--text-secondary);
+    color: var(--text-primary);
     border: 1px solid var(--border-color);
-    padding: 0.5rem 1rem;
-    border-radius: var(--radius-lg);
+    padding: 8px 16px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 0.875rem;
+    font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
-    transition: all 0.2s;
+    transition: var(--transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
 }
 
-.filter-chip:hover,
+.filter-chip:hover {
+    border-color: var(--primary-color);
+}
+
 .filter-chip.active {
     background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
 }
 
-/* Advanced Filters */
+/* Advanced Filters - Zalora Style */
 .filters-container {
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
 }
 
 .toggle-filters-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 8px;
     background: var(--bg-primary);
     border: 1px solid var(--border-color);
-    padding: 0.75rem 1rem;
-    border-radius: var(--radius-md);
+    padding: 12px 20px;
+    border-radius: 24px;
     cursor: pointer;
     font-weight: 500;
-    transition: all 0.2s;
-    margin-bottom: 1rem;
+    transition: var(--transition);
+    margin-bottom: 16px;
+    font-size: 14px;
+    color: var(--text-primary);
 }
 
 .toggle-filters-btn:hover {
     border-color: var(--primary-color);
-    color: var(--primary-color);
+    background: var(--bg-secondary);
+}
+
+.toggle-filters-btn:active {
+    transform: scale(0.98);
 }
 
 .advanced-filters {
     background: var(--bg-primary);
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--border-light);
     border-radius: var(--radius-lg);
-    padding: 1.5rem;
+    padding: 20px;
     box-shadow: var(--shadow-sm);
 }
 
@@ -661,118 +757,147 @@ body {
     background: var(--primary-dark);
 }
 
-/* Results Header */
+/* Results Header - Zalora Style */
 .results-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
+    padding: 0 16px;
 }
 
 .results-count {
     font-weight: 500;
     color: var(--text-secondary);
+    font-size: 14px;
 }
 
 .view-toggle {
     display: flex;
-    gap: 0.25rem;
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 0.25rem;
+    gap: 2px;
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 2px;
 }
 
 .view-btn {
     background: none;
     border: none;
-    padding: 0.5rem;
-    border-radius: var(--radius-sm);
+    padding: 8px 12px;
+    border-radius: 18px;
     cursor: pointer;
     color: var(--text-secondary);
-    transition: all 0.2s;
+    transition: var(--transition);
+    font-size: 12px;
+    min-width: 36px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.view-btn.active,
-.view-btn:hover {
+.view-btn.active {
     background: var(--primary-color);
     color: white;
 }
 
-/* Bikes Grid */
+.view-btn:hover:not(.active) {
+    background: var(--bg-tertiary);
+}
+
+/* Bikes Grid - Zalora product grid */
 .bikes-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 16px;
+}
+
+@media (min-width: 768px) {
+    .bikes-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 0 24px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .bikes-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        padding: 0 32px;
+    }
 }
 
 .bike-card {
     background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     overflow: hidden;
-    transition: all 0.3s;
+    transition: var(--transition);
     cursor: pointer;
     position: relative;
+    border: 1px solid transparent;
 }
 
 .bike-card:hover {
-    transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
-    border-color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
 .bike-image {
     position: relative;
     overflow: hidden;
-    height: 200px;
+    aspect-ratio: 1;
+    background: var(--bg-secondary);
 }
 
 .bike-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s;
+    transition: var(--transition);
 }
 
 .bike-card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .bike-badge {
     position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    background: var(--primary-color);
+    top: 8px;
+    left: 8px;
+    background: var(--accent-color);
     color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: var(--radius-lg);
-    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .favorite-btn {
     position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
+    top: 8px;
+    right: 8px;
     background: rgba(255, 255, 255, 0.9);
     border: none;
     border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    font-size: 1.125rem;
-    transition: all 0.2s;
-    backdrop-filter: blur(4px);
+    font-size: 14px;
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-sm);
 }
 
 .favorite-btn:hover {
     background: white;
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .favorite-btn.active {
@@ -781,62 +906,64 @@ body {
 }
 
 .bike-info {
-    padding: 1rem;
+    padding: 12px;
 }
 
 .bike-title {
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 500;
     color: var(--text-primary);
-    margin-bottom: 0.5rem;
+    margin-bottom: 4px;
     line-height: 1.3;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    min-height: 36px;
 }
 
 .bike-location {
     display: flex;
     align-items: center;
-    gap: 0.25rem;
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    margin-bottom: 0.75rem;
+    gap: 4px;
+    color: var(--text-light);
+    font-size: 12px;
+    margin-bottom: 8px;
 }
 
 .bike-rating {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 0.75rem;
-    font-size: 0.875rem;
+    gap: 4px;
+    margin-bottom: 8px;
+    font-size: 12px;
 }
 
 .stars {
-    color: var(--secondary-color);
+    color: #ffc107;
+    font-size: 12px;
 }
 
 .rating-text {
-    color: var(--text-secondary);
+    color: var(--text-light);
 }
 
 .bike-price {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 12px;
 }
 
 .price-amount {
-    font-size: 1.25rem;
+    font-size: 16px;
     font-weight: 700;
     color: var(--primary-color);
 }
 
 .price-period {
-    font-size: 0.875rem;
-    color: var(--text-secondary);
+    font-size: 12px;
+    color: var(--text-light);
 }
 
 .book-btn {
@@ -844,37 +971,51 @@ body {
     background: var(--primary-color);
     color: white;
     border: none;
-    padding: 0.75rem;
+    padding: 8px 12px;
     border-radius: var(--radius-md);
     cursor: pointer;
-    font-weight: 600;
-    transition: background 0.2s;
+    font-weight: 500;
+    transition: var(--transition);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-height: 36px;
 }
 
 .book-btn:hover {
-    background: var(--primary-dark);
+    background: var(--primary-hover);
 }
 
-/* Load More */
+/* Load More - Zalora Style */
 .load-more-container {
     text-align: center;
-    margin-top: 2rem;
+    margin: 32px 0;
+    padding: 0 16px;
 }
 
 .load-more-btn {
     background: var(--bg-primary);
-    color: var(--primary-color);
-    border: 2px solid var(--primary-color);
-    padding: 0.75rem 2rem;
-    border-radius: var(--radius-lg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 12px 32px;
+    border-radius: 24px;
     cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s;
+    font-weight: 500;
+    transition: var(--transition);
+    font-size: 14px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .load-more-btn:hover {
-    background: var(--primary-color);
-    color: white;
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+}
+
+.load-more-btn:active {
+    transform: scale(0.98);
 }
 
 /* Shops Grid */
@@ -1353,20 +1494,28 @@ body {
     background: var(--primary-dark);
 }
 
-/* Modal Styles */
+/* Modal Styles - Zalora Inspired */
 .modal {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(4px);
-    padding: 1rem;
+    z-index: 1500;
+    backdrop-filter: blur(8px);
+    padding: 16px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
 }
 
 .modal-content {
@@ -1374,44 +1523,60 @@ body {
     border-radius: var(--radius-xl);
     max-width: 500px;
     width: 100%;
-    max-height: 90vh;
+    max-height: 85vh;
     overflow-y: auto;
     box-shadow: var(--shadow-xl);
     position: relative;
+    transform: scale(0.9);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal:not(.hidden) .modal-content {
+    transform: scale(1);
 }
 
 .modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 1.5rem 1rem;
+    padding: 20px 20px 16px;
     border-bottom: 1px solid var(--border-light);
 }
 
 .modal-title {
-    font-size: 1.25rem;
+    font-size: 18px;
     font-weight: 600;
     color: var(--text-primary);
+    margin: 0;
 }
 
 .modal-close {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 20px;
     cursor: pointer;
     color: var(--text-secondary);
-    padding: 0.25rem;
-    border-radius: var(--radius-sm);
-    transition: all 0.2s;
+    padding: 8px;
+    border-radius: 50%;
+    transition: var(--transition);
+    min-width: 36px;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-close:hover {
-    background: var(--bg-tertiary);
+    background: var(--bg-secondary);
     color: var(--text-primary);
 }
 
+.modal-close:active {
+    transform: scale(0.95);
+}
+
 .modal-body {
-    padding: 1.5rem;
+    padding: 20px;
 }
 
 /* Booking Modal */
@@ -1901,50 +2066,68 @@ body {
     transition: all 0.2s;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .container {
-        padding: 0 0.75rem;
+/* Mobile First - Zalora Style Responsive Design */
+
+/* Base mobile styles are already defined above */
+
+/* Small mobile adjustments */
+@media (max-width: 375px) {
+    .header-container {
+        padding: 8px 12px;
     }
     
-    .bikes-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 1rem;
-    }
-    
-    .shops-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    .logo-text {
+        font-size: 18px;
     }
     
     .hero-title {
-        font-size: 2.25rem;
+        font-size: 28px;
     }
     
-    .hero-subtitle {
-        font-size: 1.0625rem;
+    .bikes-grid {
+        gap: 12px;
+        padding: 0 12px;
+    }
+    
+    .bike-info {
+        padding: 8px;
     }
 }
 
-@media (max-width: 768px) {
+/* Mobile styles (up to 767px) */
+@media (max-width: 767px) {
     .mobile-menu-btn {
         display: block;
-        min-height: 44px;
-        min-width: 44px;
     }
     
     .header-container {
-        padding: 0.5rem 1rem;
         flex-wrap: wrap;
+        min-height: 56px;
     }
     
     .search-bar {
         order: 3;
         width: 100%;
-        margin-top: 0.75rem;
+        margin-top: 12px;
+    }
+    
+    .search-input-container {
+        height: 36px;
+        border-radius: 18px;
+    }
+    
+    .search-input {
+        padding: 0 12px;
+        font-size: 14px;
+    }
+    
+    .search-btn {
+        padding: 0 12px;
+        min-width: 40px;
     }
     
     .header-right {
-        gap: 0.25rem;
+        gap: 4px;
     }
     
     .btn-text {
@@ -1952,351 +2135,186 @@ body {
     }
     
     .header-btn {
-        padding: 0.5rem;
-        min-width: 44px;
-        min-height: 44px;
+        padding: 8px;
+        min-width: 40px;
+        min-height: 40px;
         justify-content: center;
     }
     
-    .hero-title {
-        font-size: 2rem;
-        line-height: 1.1;
-    }
-    
-    .hero-subtitle {
-        font-size: 1rem;
+    .login-btn,
+    .rent-btn {
+        padding: 6px 12px;
+        border-radius: 16px;
+        font-size: 12px;
     }
     
     .hero-section {
-        padding: 2rem 1rem;
+        padding: 24px 0;
+    }
+    
+    .hero-title {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+    
+    .hero-subtitle {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+    
+    .hero-search-input {
+        height: 40px;
+        border-radius: 20px;
+    }
+    
+    .hero-input {
+        padding: 0 16px;
+        font-size: 14px;
+    }
+    
+    .hero-search-btn {
+        padding: 0 20px;
+        font-size: 12px;
     }
     
     .section {
-        padding: 1.5rem 0;
-    }
-    
-    .section-title {
-        font-size: 1.5rem;
+        padding: 20px 0;
     }
     
     .quick-filters {
-        gap: 0.375rem;
-        padding: 0 0.5rem;
+        margin: 16px 0;
+        padding: 0 16px 8px;
     }
     
     .filter-chip {
-        padding: 0.5rem 0.875rem;
-        font-size: 0.8125rem;
-        min-height: 44px;
-        display: flex;
-        align-items: center;
+        padding: 6px 12px;
+        font-size: 11px;
+        min-height: 32px;
+        border-radius: 16px;
+    }
+    
+    .nav-container {
+        padding: 12px 16px;
+        gap: 24px;
+    }
+    
+    .nav-btn {
+        font-size: 12px;
+        padding: 6px 0;
+    }
+    
+    .nav-btn.active::after {
+        bottom: -12px;
+    }
+    
+    /* Results and filters */
+    .results-header {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+        padding: 0 16px;
+        margin-bottom: 16px;
+    }
+    
+    .filters-container {
+        padding: 0 16px;
+    }
+    
+    .toggle-filters-btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 40px;
+        margin-bottom: 16px;
+    }
+    
+    .advanced-filters {
+        margin: 0 -16px;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
     }
     
     .filters-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 16px;
     }
     
     .filter-actions {
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 12px;
     }
     
     .clear-btn,
     .apply-btn {
-        min-height: 44px;
-    }
-    
-    .results-header {
-        flex-direction: column;
-        gap: 1rem;
-        align-items: flex-start;
-    }
-    
-    .bikes-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-    }
-    
-    .bike-card {
-        border-radius: var(--radius-md);
-    }
-    
-    .bike-image {
-        height: 140px;
-    }
-    
-    .bike-info {
-        padding: 0.75rem;
-    }
-    
-    .bike-title {
-        font-size: 0.875rem;
-        line-height: 1.3;
-    }
-    
-    .bike-price {
-        margin-bottom: 0.75rem;
-    }
-    
-    .price-amount {
-        font-size: 1.125rem;
-    }
-    
-    .book-btn {
-        padding: 0.75rem;
-        font-size: 0.875rem;
-        min-height: 44px;
-    }
-    
-    .favorite-btn {
-        min-width: 44px;
-        min-height: 44px;
-    }
-    
-    .shops-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .shop-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .progress-steps {
-        margin-bottom: 2rem;
-    }
-    
-    .step-content {
-        padding: 1.5rem;
-    }
-    
-    .date-selection {
-        grid-template-columns: 1fr;
-    }
-    
-    .form-actions {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-    
-    .prev-btn,
-    .next-btn,
-    .submit-btn {
-        min-height: 44px;
-    }
-    
-    .modal {
-        padding: 0.5rem;
-        align-items: flex-start;
-        padding-top: 2rem;
-    }
-    
-    .modal-content {
-        max-height: 90vh;
-        width: 100%;
-        margin: 0;
-    }
-    
-    .modal-header,
-    .modal-body {
-        padding: 1rem;
-    }
-    
-    .modal-close {
-        min-width: 44px;
-        min-height: 44px;
-    }
-    
-    .shop-header-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 1rem;
-    }
-    
-    .shop-header-logo {
-        width: 4rem;
-        height: 4rem;
-        font-size: 1.5rem;
-    }
-    
-    .category-nav {
-        padding: 0;
-    }
-    
-    .nav-container {
-        padding: 0.75rem 1rem;
-        gap: 1.5rem;
-    }
-    
-    .nav-btn {
-        min-height: 44px;
-        padding: 0.5rem 0;
+        min-height: 40px;
+        border-radius: 20px;
     }
 }
 
-@media (max-width: 480px) {
-    .container {
-        padding: 0 0.75rem;
-    }
-    
+/* Tablet styles */
+@media (min-width: 768px) and (max-width: 1023px) {
     .header-container {
-        padding: 0.75rem;
-    }
-    
-    .logo-text {
-        font-size: 1.125rem;
+        padding: 12px 24px;
     }
     
     .hero-section {
-        padding: 2.5rem 1rem;
+        padding: 48px 0;
     }
     
     .hero-title {
-        font-size: 1.875rem;
-        line-height: 1.1;
+        font-size: 36px;
     }
     
     .hero-subtitle {
-        font-size: 0.9375rem;
-        margin-bottom: 1.5rem;
+        font-size: 18px;
     }
     
-    .hero-search-input {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-    
-    .hero-input {
-        border-radius: var(--radius-lg);
-    }
-    
-    .hero-search-btn {
-        border-radius: var(--radius-lg);
-        min-height: 44px;
-    }
-    
-    .bikes-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .bike-image {
-        height: 200px;
-    }
-    
-    .bike-info {
-        padding: 1rem;
-    }
-    
-    .bike-title {
-        font-size: 1rem;
-        line-height: 1.4;
-    }
-    
-    .section-header {
-        text-align: left;
-        margin-bottom: 1.5rem;
-    }
-    
-    .section-title {
-        font-size: 1.375rem;
-    }
-    
-    .form-title {
-        font-size: 1.625rem;
-    }
-    
-    .step-content {
-        padding: 1.25rem;
-    }
-    
-    .progress-steps::before {
-        display: none;
-    }
-    
-    .progress-steps {
-        gap: 1rem;
-        margin-bottom: 1.5rem;
-    }
-    
-    .step-number {
-        width: 2.75rem;
-        height: 2.75rem;
-        font-size: 0.875rem;
-    }
-    
-    .step-label {
-        font-size: 0.8125rem;
+    .nav-container {
+        gap: 40px;
+        padding: 16px 24px;
     }
     
     .quick-filters {
-        padding: 0;
-        margin-bottom: 1rem;
+        padding: 0 24px 8px;
+    }
+}
+
+/* Desktop styles */
+@media (min-width: 1024px) {
+    .header-container {
+        padding: 16px 32px;
     }
     
-    .filter-chip {
-        padding: 0.625rem 1rem;
-        font-size: 0.875rem;
+    .hero-section {
+        padding: 60px 0;
     }
     
-    .toggle-filters-btn {
-        min-height: 44px;
-        width: 100%;
-        justify-content: center;
+    .hero-title {
+        font-size: 40px;
     }
     
-    .advanced-filters {
-        padding: 1.25rem;
+    .hero-subtitle {
+        font-size: 18px;
     }
     
-    .view-toggle {
-        width: 100%;
-        justify-content: center;
+    .nav-container {
+        gap: 48px;
+        padding: 20px 32px;
     }
     
-    .view-btn {
-        min-width: 44px;
-        min-height: 44px;
+    .quick-filters {
+        padding: 0 32px 8px;
     }
     
-    .load-more-btn {
-        min-height: 44px;
-        padding: 0.875rem 2rem;
+    .bikes-grid {
+        grid-template-columns: repeat(5, 1fr);
     }
-    
-    .back-btn {
-        min-height: 44px;
-        margin-bottom: 1.5rem;
-    }
-    
-    .book-btn-primary {
-        min-height: 48px;
-        font-size: 1rem;
-    }
-    
-    .auth-btn {
-        min-height: 44px;
-    }
-    
-    .social-btn {
-        min-height: 44px;
-    }
-    
-    .submit-review-btn {
-        min-height: 44px;
-    }
-    
-    .success-btn {
-        min-height: 44px;
-    }
-    
-    .cta-btn {
-        min-height: 44px;
+}
+
+/* Large desktop */
+@media (min-width: 1440px) {
+    .bikes-grid {
+        grid-template-columns: repeat(6, 1fr);
     }
 }
 
@@ -2342,8 +2360,8 @@ body {
     }
 }
 
-/* Mobile-Specific Enhancements */
-@media (max-width: 768px) {
+/* Mobile-Specific Enhancements - Zalora Style */
+@media (max-width: 767px) {
     /* Improve form inputs on mobile */
     .form-input,
     .form-select,
@@ -2356,6 +2374,7 @@ body {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        border-radius: var(--radius-md);
     }
     
     /* Better touch scrolling */
@@ -2363,6 +2382,7 @@ body {
     .quick-filters,
     .mobile-nav {
         -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
     }
     
     /* Prevent horizontal scroll */
@@ -2370,14 +2390,15 @@ body {
         overflow-x: hidden;
     }
     
-    /* Improve tap targets */
+    /* Improve tap targets - Zalora style */
     .bike-card,
     .shop-card {
         cursor: pointer;
-        -webkit-tap-highlight-color: rgba(37, 99, 235, 0.1);
+        -webkit-tap-highlight-color: rgba(0,0,0,0.05);
+        touch-action: manipulation;
     }
     
-    /* Better modal positioning on mobile */
+    /* Mobile modal - full screen like Zalora */
     .modal {
         position: fixed;
         top: 0;
@@ -2386,38 +2407,69 @@ body {
         bottom: 0;
         padding: 0;
         align-items: stretch;
+        background: rgba(0,0,0,0.5);
     }
     
     .modal-content {
-        border-radius: 0;
-        height: 100%;
-        max-height: none;
+        border-radius: 12px 12px 0 0;
+        height: auto;
+        max-height: 90vh;
         overflow-y: auto;
+        margin-top: auto;
+        animation: slideUp 0.3s ease-out;
     }
     
-    /* Sticky header on mobile */
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+    
+    /* Fixed header with proper spacing */
     .header {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
-        z-index: 100;
+        z-index: 1000;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
     }
     
     .main-content {
-        margin-top: 120px; /* Account for fixed header */
+        margin-top: 100px; /* Account for fixed header */
     }
     
-    /* Better spacing for mobile */
-    .container {
-        padding-left: 1rem;
-        padding-right: 1rem;
+    /* Pull-to-refresh indicator */
+    .hero-section {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    /* Smooth scrolling for filter chips */
+    .quick-filters::-webkit-scrollbar {
+        display: none;
+    }
+    
+    /* Better button feedback */
+    .filter-chip:active,
+    .nav-btn:active,
+    .book-btn:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
     }
 }
 
-/* Touch device optimizations */
+/* Touch device optimizations - Zalora approach */
 @media (hover: none) and (pointer: coarse) {
-    .bike-card:hover,
+    .bike-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-md);
+    }
+    
     .shop-card:hover {
         transform: none;
         box-shadow: var(--shadow-md);
@@ -2426,29 +2478,56 @@ body {
     .header-btn:hover,
     .nav-btn:hover,
     .filter-chip:hover {
-        background: var(--bg-tertiary);
+        background: var(--bg-secondary);
+    }
+    
+    /* Active states for better touch feedback */
+    .bike-card:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+    
+    .header-btn:active,
+    .nav-btn:active {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
     }
 }
 
-/* Landscape orientation on mobile */
-@media (max-width: 768px) and (orientation: landscape) {
+/* Landscape orientation on mobile - Zalora style */
+@media (max-width: 767px) and (orientation: landscape) {
     .hero-section {
-        padding: 1.5rem 1rem;
+        padding: 20px 0;
     }
     
     .hero-title {
-        font-size: 1.75rem;
+        font-size: 20px;
+        margin-bottom: 6px;
+    }
+    
+    .hero-subtitle {
+        font-size: 12px;
+        margin-bottom: 16px;
     }
     
     .modal-content {
-        max-height: 95vh;
-        border-radius: var(--radius-xl);
+        max-height: 85vh;
+        border-radius: var(--radius-lg);
         height: auto;
+        margin: auto;
     }
     
     .modal {
         align-items: center;
-        padding: 0.5rem;
+        padding: 16px;
+    }
+    
+    .header-container {
+        min-height: 48px;
+    }
+    
+    .main-content {
+        margin-top: 80px;
     }
 }
 
